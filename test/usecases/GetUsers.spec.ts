@@ -1,5 +1,5 @@
 import { GetUsers } from "@/usecases/GetUsers"
-import { InvalidCredentialsError } from "@/domain/errors"
+import { InvalidCredentialsError, UnexpectedError } from "@/domain/errors"
 import { TUser } from "@/domain/i-usecases"
 import { EHttpStatusCode } from "@/usecases/protocols"
 import { HttpClientSpy } from "@test/usecases/mocks"
@@ -19,7 +19,7 @@ const makeSUT = () => {
   ]
 
   const httpClient = new HttpClientSpy()
-  httpClient.responseData = users
+  httpClient.responseData = [ ...users ]
 
   const url = "https://localhost/users"
   const sut = new GetUsers(url, httpClient)
@@ -57,5 +57,20 @@ describe("Get Users", () => {
     httpClient.status = EHttpStatusCode.unauthorized
     const promise = sut.execute(accessToken)
     expect(promise).rejects.toThrow(new InvalidCredentialsError())
+  })
+
+  test("should throw UnexpectedError error if HttpClient returns status except 200", async () => {
+    const { sut, httpClient, accessToken } = makeSUT()
+    httpClient.status = EHttpStatusCode.serverError
+    const promise = sut.execute(accessToken)
+    expect(promise).rejects.toThrow(new UnexpectedError())
+  })
+
+  test("should return correct users if HttpClient returns 200", async () => {
+    const { sut, httpClient, accessToken, users } = makeSUT()
+    httpClient.status = EHttpStatusCode.ok
+    const response: TUser[] = (await sut.execute(accessToken)) as TUser[]
+    expect(response.pop()?.id).toBe(users.pop()?.id)
+    expect(response).toEqual(users)
   })
 })
