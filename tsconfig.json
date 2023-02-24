@@ -17,8 +17,9 @@
     "jsx": "react-jsx",
     "paths": {
       "@/*": ["./src/*"],
-      "@/test/*": ["./test/*"]
+      "@test/*": ["./test/*"]
     },
+    "types": ["vitest/globals"]
   },
   "include": ["env.d.ts", "src/**/*", "test/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]

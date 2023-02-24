@@ -2,7 +2,7 @@ import { GetUsers } from "@/usecases/GetUsers"
 import { InvalidCredentialsError } from "@/domain/errors"
 import { TUser } from "@/domain/i-usecases"
 import { EHttpStatusCode } from "@/usecases/protocols"
-import { HttpClientSpy } from "./mocks/HttpClientSpy"
+import { HttpClientSpy } from "@test/usecases/mocks"
 
 const makeSUT = () => {
   const users: TUser[] = [
