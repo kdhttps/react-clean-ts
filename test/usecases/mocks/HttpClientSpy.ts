@@ -1,4 +1,4 @@
-import { EHttpStatusCode, IHttpClient, THttpRequest, THttpResponse } from "@/usecases/protocols"
+import { EHttpStatusCode, IHttpClient, THttpRequest, THttpResponse } from '@/usecases/protocols'
 
 export class HttpClientSpy implements IHttpClient {
   url?: string

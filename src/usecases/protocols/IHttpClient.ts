@@ -1,4 +1,4 @@
-export type THttpMethod = "post" | "get" | "put" | "delete" | "patch"
+export type THttpMethod = 'post' | 'get' | 'put' | 'delete' | 'patch'
 
 export enum EHttpStatusCode {
   ok = 200,
