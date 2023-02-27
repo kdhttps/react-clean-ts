@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
-import './App.css'
 import { makeGetUsers } from './factories'
 import { TUser } from '@/domain/entities/TUsers'
 
@@ -39,18 +38,22 @@ function App() {
       </div>
       <div className='card'>
         <table>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-          </tr>
-          {users.map((user) => {
-            return (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-              </tr>
-            )
-          })}
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            {users.map((user) => {
+              return (
+                <tr key={user.id}>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                </tr>
+              )
+            })}
+          </tbody>
         </table>
       </div>
       <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
