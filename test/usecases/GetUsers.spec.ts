@@ -1,8 +1,8 @@
 import { GetUsers } from '@/usecases/GetUsers'
 import { InvalidCredentialsError, UnexpectedError } from '@/domain/errors'
-import { TUser } from '@/domain/i-usecases'
 import { EHttpStatusCode } from '@/usecases/protocols'
 import { HttpClientSpy } from '@test/usecases/mocks'
+import { TUser } from '@/domain/entities/TUsers'
 
 const makeSUT = () => {
   const users: TUser[] = [

@@ -1,6 +1,7 @@
+import { TUser } from '@/domain/entities/TUsers'
 import { InvalidCredentialsError } from '@/domain/errors/InvalidCredentialsError'
 import { UnexpectedError } from '@/domain/errors/UnexpectedError'
-import { IGetUsers, TUser } from '@/domain/i-usecases'
+import { IGetUsers } from '@/domain/i-usecases'
 import { EHttpStatusCode, IHttpClient } from '@/usecases/protocols'
 
 export class GetUsers implements IGetUsers {
