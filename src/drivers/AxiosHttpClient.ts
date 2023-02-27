@@ -1,5 +1,5 @@
 import type { IHttpClient, THttpRequest, THttpResponse } from '@/usecases/protocols'
-import * as axios from 'axios'
+import axios from 'axios'
 
 export class AxiosHttpClient implements IHttpClient {
   async request(httpRequest: THttpRequest): Promise<THttpResponse> {
