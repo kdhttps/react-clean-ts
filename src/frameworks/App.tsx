@@ -1,13 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { BrowserRouter } from 'react-router-dom'
+import { HelmetProvider } from 'react-helmet-async'
+
 import { makeGetUsers } from './factories'
 import { TUser } from '@/domain/entities/TUsers'
+import ThemeProvider from './theme'
+import ScrollToTop from './components/scroll-to-top'
+import { StyledChart } from './components/chart'
+import Router from './routes'
 
 function App() {
   const [users, setUsers] = useState<TUser[]>([])
 
   useEffect(() => {
-    getUsers()
+    // getUsers()
   }, [])
 
   const getUsers = async () => {
@@ -20,44 +26,15 @@ function App() {
   }
 
   return (
-    <div className='App'>
-      <div>
-        <a href='https://vitejs.dev' target='_blank' rel='noreferrer'>
-          <img src='/vite.svg' className='logo' alt='Vite logo' />
-        </a>
-        <a href='https://reactjs.org' target='_blank' rel='noreferrer'>
-          <img src={reactLogo} className='logo react' alt='React logo' />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className='card'>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-        <p>{import.meta.env.REACT_APP_TITLE}</p>
-      </div>
-      <div className='card'>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => {
-              return (
-                <tr key={user.id}>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
-      <p className='read-the-docs'>Click on the Vite and React logos to learn more</p>
-    </div>
+    <HelmetProvider>
+      <BrowserRouter>
+        <ThemeProvider>
+          <ScrollToTop />
+          <StyledChart />
+          <Router />
+        </ThemeProvider>
+      </BrowserRouter>
+    </HelmetProvider>
   )
 }
 
