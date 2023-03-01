@@ -1,13 +1,11 @@
 import { Helmet } from 'react-helmet-async'
 import { filter } from 'lodash'
-import { sentenceCase } from 'change-case'
 import React, { useEffect, useState } from 'react'
 import {
   Card,
   Table,
   Stack,
   Paper,
-  Avatar,
   Button,
   Popover,
   Checkbox,
@@ -24,15 +22,14 @@ import {
 import Iconify from '../components/iconify'
 import Scrollbar from '../components/scrollbar'
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user'
-import USERLIST from '../_mock/user'
 import { TUser } from '@/domain/entities/TUsers'
 import { makeGetUsers } from '../factories'
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
-  { id: 'email', label: 'Company', alignRight: false },
-  { id: 'username', label: 'Role', alignRight: false },
-  { id: '' },
+  { id: 'email', label: 'Email', alignRight: false },
+  { id: 'username', label: 'Username', alignRight: false },
+  { id: 'actions', label: '', alignRight: true },
 ]
 
 function descendingComparator(a, b, orderBy) {
@@ -66,6 +63,7 @@ function applySortFilter(array, comparator, query) {
 
 export default function UserPage() {
   const [users, setUsers] = useState<TUser[]>([])
+  // const [filteredUsers, setFilteredUsers] = useState([])
 
   const [open, setOpen] = useState(null)
 
@@ -87,9 +85,9 @@ export default function UserPage() {
 
   const getUsers = async () => {
     try {
-      const response: TUser[] = (await makeGetUsers().execute('123')) as TUser[]
-      const filteredUsers = applySortFilter(response, getComparator(order, orderBy), filterName)
-      setUsers(filteredUsers)
+      const users: TUser[] = (await makeGetUsers().execute('123')) as TUser[]
+      setUsers(users)
+      // setFilteredUsers(applySortFilter(users, getComparator(order, orderBy), filterName))
     } catch (e) {
       console.error(e)
     }
@@ -111,7 +109,7 @@ export default function UserPage() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = USERLIST.map((n) => n.name)
+      const newSelecteds = users.map((n) => n.name)
       setSelected(newSelecteds)
       return
     }
@@ -150,9 +148,9 @@ export default function UserPage() {
     setFilterName(event.target.value)
   }
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0
-
-  const isNotFound = !users.length && !!filterName
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - users.length) : 0
+  const filteredUsers = applySortFilter(users, getComparator(order, orderBy), filterName)
+  const isNotFound = !filteredUsers.length && !!filterName
 
   return (
     <>
@@ -184,51 +182,53 @@ export default function UserPage() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={USERLIST.length}
+                  rowCount={users.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-                    const { id, name, email, username } = row
-                    const selectedUser = selected.indexOf(name) !== -1
+                  {filteredUsers
+                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    .map((row) => {
+                      const { id, name, email, username } = row
+                      const selectedUser = selected.indexOf(name) !== -1
 
-                    return (
-                      <TableRow
-                        hover
-                        key={id}
-                        tabIndex={-1}
-                        role='checkbox'
-                        selected={selectedUser}
-                      >
-                        <TableCell padding='checkbox'>
-                          <Checkbox
-                            checked={selectedUser}
-                            onChange={(event) => handleClick(event, name)}
-                          />
-                        </TableCell>
+                      return (
+                        <TableRow
+                          hover
+                          key={id}
+                          tabIndex={-1}
+                          role='checkbox'
+                          selected={selectedUser}
+                        >
+                          <TableCell padding='checkbox'>
+                            <Checkbox
+                              checked={selectedUser}
+                              onChange={(event) => handleClick(event, name)}
+                            />
+                          </TableCell>
 
-                        <TableCell component='th' scope='row' padding='none'>
-                          <Stack direction='row' alignItems='center' spacing={2}>
-                            <Typography variant='subtitle2' noWrap>
-                              {name}
-                            </Typography>
-                          </Stack>
-                        </TableCell>
+                          <TableCell component='th' scope='row' padding='none'>
+                            <Stack direction='row' alignItems='center' spacing={3}>
+                              <Typography variant='subtitle2' noWrap>
+                                {name}
+                              </Typography>
+                            </Stack>
+                          </TableCell>
 
-                        <TableCell align='left'>{email}</TableCell>
+                          <TableCell align='left'>{email}</TableCell>
 
-                        <TableCell align='left'>{username}</TableCell>
+                          <TableCell align='left'>{username}</TableCell>
 
-                        <TableCell align='right'>
-                          <IconButton size='large' color='inherit' onClick={handleOpenMenu}>
-                            <Iconify icon={'eva:more-vertical-fill'} />
-                          </IconButton>
-                        </TableCell>
-                      </TableRow>
-                    )
-                  })}
+                          <TableCell align='right'>
+                            <IconButton size='large' color='inherit' onClick={handleOpenMenu}>
+                              <Iconify icon={'eva:more-vertical-fill'} />
+                            </IconButton>
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
@@ -266,7 +266,7 @@ export default function UserPage() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component='div'
-            count={USERLIST.length}
+            count={users.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
