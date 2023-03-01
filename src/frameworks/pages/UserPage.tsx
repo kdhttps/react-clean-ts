@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { filter } from 'lodash'
 import { sentenceCase } from 'change-case'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Card,
   Table,
@@ -21,18 +21,17 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material'
-import Label from '../components/label'
 import Iconify from '../components/iconify'
 import Scrollbar from '../components/scrollbar'
 import { UserListHead, UserListToolbar } from '../sections/@dashboard/user'
 import USERLIST from '../_mock/user'
+import { TUser } from '@/domain/entities/TUsers'
+import { makeGetUsers } from '../factories'
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },
-  { id: 'company', label: 'Company', alignRight: false },
-  { id: 'role', label: 'Role', alignRight: false },
-  { id: 'isVerified', label: 'Verified', alignRight: false },
-  { id: 'status', label: 'Status', alignRight: false },
+  { id: 'email', label: 'Company', alignRight: false },
+  { id: 'username', label: 'Role', alignRight: false },
   { id: '' },
 ]
 
@@ -66,6 +65,8 @@ function applySortFilter(array, comparator, query) {
 }
 
 export default function UserPage() {
+  const [users, setUsers] = useState<TUser[]>([])
+
   const [open, setOpen] = useState(null)
 
   const [page, setPage] = useState(0)
@@ -79,6 +80,20 @@ export default function UserPage() {
   const [filterName, setFilterName] = useState('')
 
   const [rowsPerPage, setRowsPerPage] = useState(5)
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
+  const getUsers = async () => {
+    try {
+      const response: TUser[] = (await makeGetUsers().execute('123')) as TUser[]
+      const filteredUsers = applySortFilter(response, getComparator(order, orderBy), filterName)
+      setUsers(filteredUsers)
+    } catch (e) {
+      console.error(e)
+    }
+  }
 
   const handleOpenMenu = (event) => {
     setOpen(event.currentTarget)
@@ -137,17 +152,15 @@ export default function UserPage() {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0
 
-  const filteredUsers = applySortFilter(USERLIST, getComparator(order, orderBy), filterName)
-
-  const isNotFound = !filteredUsers.length && !!filterName
+  const isNotFound = !users.length && !!filterName
 
   return (
     <>
       <Helmet>
-        <title> User | Minimal UI </title>
+        <title> User </title>
       </Helmet>
 
-      <Container>
+      <Container maxWidth='xl'>
         <Stack direction='row' alignItems='center' justifyContent='space-between' mb={5}>
           <Typography variant='h4' gutterBottom>
             User
@@ -177,56 +190,45 @@ export default function UserPage() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredUsers
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
-                      const { id, name, role, status, company, avatarUrl, isVerified } = row
-                      const selectedUser = selected.indexOf(name) !== -1
+                  {users.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                    const { id, name, email, username } = row
+                    const selectedUser = selected.indexOf(name) !== -1
 
-                      return (
-                        <TableRow
-                          hover
-                          key={id}
-                          tabIndex={-1}
-                          role='checkbox'
-                          selected={selectedUser}
-                        >
-                          <TableCell padding='checkbox'>
-                            <Checkbox
-                              checked={selectedUser}
-                              onChange={(event) => handleClick(event, name)}
-                            />
-                          </TableCell>
+                    return (
+                      <TableRow
+                        hover
+                        key={id}
+                        tabIndex={-1}
+                        role='checkbox'
+                        selected={selectedUser}
+                      >
+                        <TableCell padding='checkbox'>
+                          <Checkbox
+                            checked={selectedUser}
+                            onChange={(event) => handleClick(event, name)}
+                          />
+                        </TableCell>
 
-                          <TableCell component='th' scope='row' padding='none'>
-                            <Stack direction='row' alignItems='center' spacing={2}>
-                              <Avatar alt={name} src={avatarUrl} />
-                              <Typography variant='subtitle2' noWrap>
-                                {name}
-                              </Typography>
-                            </Stack>
-                          </TableCell>
+                        <TableCell component='th' scope='row' padding='none'>
+                          <Stack direction='row' alignItems='center' spacing={2}>
+                            <Typography variant='subtitle2' noWrap>
+                              {name}
+                            </Typography>
+                          </Stack>
+                        </TableCell>
 
-                          <TableCell align='left'>{company}</TableCell>
+                        <TableCell align='left'>{email}</TableCell>
 
-                          <TableCell align='left'>{role}</TableCell>
+                        <TableCell align='left'>{username}</TableCell>
 
-                          <TableCell align='left'>{isVerified ? 'Yes' : 'No'}</TableCell>
-
-                          <TableCell align='left'>
-                            <Label color={(status === 'banned' && 'error') || 'success'}>
-                              {sentenceCase(status)}
-                            </Label>
-                          </TableCell>
-
-                          <TableCell align='right'>
-                            <IconButton size='large' color='inherit' onClick={handleOpenMenu}>
-                              <Iconify icon={'eva:more-vertical-fill'} />
-                            </IconButton>
-                          </TableCell>
-                        </TableRow>
-                      )
-                    })}
+                        <TableCell align='right'>
+                          <IconButton size='large' color='inherit' onClick={handleOpenMenu}>
+                            <Iconify icon={'eva:more-vertical-fill'} />
+                          </IconButton>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
                   {emptyRows > 0 && (
                     <TableRow style={{ height: 53 * emptyRows }}>
                       <TableCell colSpan={6} />
