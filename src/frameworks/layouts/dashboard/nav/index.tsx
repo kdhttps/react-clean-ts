@@ -1,8 +1,8 @@
+import React from 'react'
 import PropTypes from 'prop-types'
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { styled, alpha } from '@mui/material/styles'
-import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material'
+import { Box, Button, Drawer, Typography, Stack } from '@mui/material'
 import useResponsive from '../../../hooks/useResponsive'
 import Scrollbar from '../../../components/scrollbar'
 import NavSection from '../../../components/nav-section'
@@ -10,14 +10,6 @@ import navConfig from './config'
 import Iconify from '@/frameworks/components/iconify/Iconify'
 
 const NAV_WIDTH = 280
-
-const StyledAccount = styled('div')(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  padding: theme.spacing(2, 2.5),
-  borderRadius: Number(theme.shape.borderRadius) * 1.5,
-  backgroundColor: alpha(theme.palette.grey[500], 0.12),
-}))
 
 Nav.propTypes = {
   openNav: PropTypes.bool,

@@ -21,7 +21,7 @@ import {
 } from '@mui/material'
 import Iconify from '../components/iconify'
 import Scrollbar from '../components/scrollbar'
-import { UserListHead, UserListToolbar } from '../sections/@dashboard/user'
+import { UserListHead, UserListToolbar } from '../sections/dashboard/user'
 import { TUser } from '@/domain/entities/TUsers'
 import { makeGetUsers } from '../factories'
 
