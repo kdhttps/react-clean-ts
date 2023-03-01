@@ -1,7 +1,7 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { styled } from '@mui/material/styles'
-import Logo from '../../components/logo'
+import Iconify from '@/frameworks/components/iconify/Iconify'
 
 const StyledHeader = styled('header')(({ theme }) => ({
   top: 0,
@@ -19,7 +19,7 @@ export default function SimpleLayout() {
   return (
     <>
       <StyledHeader>
-        <Logo />
+        <Iconify icon={'fa6-solid:shapes'} color='#1877F2' width={32} />
       </StyledHeader>
 
       <Outlet />

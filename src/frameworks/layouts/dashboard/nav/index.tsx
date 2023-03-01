@@ -4,10 +4,10 @@ import { useLocation } from 'react-router-dom'
 import { styled, alpha } from '@mui/material/styles'
 import { Box, Link, Button, Drawer, Typography, Avatar, Stack } from '@mui/material'
 import useResponsive from '../../../hooks/useResponsive'
-import Logo from '../../../components/logo'
 import Scrollbar from '../../../components/scrollbar'
 import NavSection from '../../../components/nav-section'
 import navConfig from './config'
+import Iconify from '@/frameworks/components/iconify/Iconify'
 
 const NAV_WIDTH = 280
 
@@ -44,7 +44,7 @@ export default function Nav({ openNav, onCloseNav }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
-        <Logo />
+        <Iconify icon={'fa6-solid:shapes'} /> &nbsp; Code
       </Box>
 
       <NavSection data={navConfig} />
