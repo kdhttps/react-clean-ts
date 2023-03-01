@@ -34,8 +34,6 @@ const StyledSearch = styled(OutlinedInput)(({ theme }) => ({
   },
 }))
 
-// ----------------------------------------------------------------------
-
 UserListToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,

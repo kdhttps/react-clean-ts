@@ -7,7 +7,7 @@ const navConfig = [
   {
     title: 'dashboard',
     path: '/dashboard/home',
-    icon: icon('material-symbols:space-dashboard'),
+    icon: icon('clarity:dashboard-solid'),
   },
   {
     title: 'users',
