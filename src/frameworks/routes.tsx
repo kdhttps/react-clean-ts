@@ -1,11 +1,11 @@
 import React from 'react'
 import { Navigate, useRoutes } from 'react-router-dom'
-import DashboardLayout from './layouts/dashboard'
-import SimpleLayout from './layouts/simple'
-import UserPage from './pages/UserPage'
-import DashboardPage from './pages/DashboardAppPage'
-import LoginPage from './pages/LoginPage'
-import Page404 from './pages/Page404'
+import DashboardLayout from '@/frameworks/layouts/dashboard'
+import SimpleLayout from '@/frameworks/layouts/simple'
+import UserPage from '@/frameworks/pages/UserPage'
+import DashboardPage from '@/frameworks/pages/DashboardAppPage'
+import LoginPage from '@/frameworks/pages/LoginPage'
+import Page404 from '@/frameworks/pages/Page404'
 
 export default function Router() {
   const routes = useRoutes([

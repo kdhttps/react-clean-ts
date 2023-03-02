@@ -2,9 +2,9 @@ import React from 'react'
 import { Helmet } from 'react-helmet-async'
 import { styled } from '@mui/material/styles'
 import { Container, Typography } from '@mui/material'
-import useResponsive from '../hooks/useResponsive'
-import Iconify from '../components/iconify'
-import { LoginForm } from '../sections/auth/login'
+import useResponsive from '@/frameworks/hooks/useResponsive'
+import Iconify from '@/frameworks/components/iconify/Iconify'
+import { LoginForm } from '@/frameworks/sections/auth/login'
 
 const StyledRoot = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {

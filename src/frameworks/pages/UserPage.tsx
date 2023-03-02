@@ -19,11 +19,11 @@ import {
   TableContainer,
   TablePagination,
 } from '@mui/material'
-import Iconify from '../components/iconify'
-import Scrollbar from '../components/scrollbar'
-import { UserListHead, UserListToolbar } from '../sections/dashboard/user'
+import Iconify from '@/frameworks/components/iconify/Iconify'
+import Scrollbar from '@/frameworks/components/scrollbar'
+import { UserListHead, UserListToolbar } from '@/frameworks/sections/dashboard/user'
 import { TUser } from '@/domain/entities/TUsers'
-import { makeGetUsers } from '../factories'
+import { makeGetUsers } from '@/frameworks/factories'
 
 const TABLE_HEAD = [
   { id: 'name', label: 'Name', alignRight: false },

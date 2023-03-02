@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Box, Button, Drawer, Typography, Stack } from '@mui/material'
-import useResponsive from '../../../hooks/useResponsive'
-import Scrollbar from '../../../components/scrollbar'
-import NavSection from '../../../components/nav-section'
-import navConfig from './config'
 import Iconify from '@/frameworks/components/iconify/Iconify'
+import useResponsive from '@/frameworks/hooks/useResponsive'
+import Scrollbar from '@/frameworks/components/scrollbar/Scrollbar'
+import NavSection from '@/frameworks/components/nav-section/NavSection'
+import navConfig from './config'
+import palette from '@/frameworks/theme/palette'
 
 const NAV_WIDTH = 280
 
@@ -36,7 +37,7 @@ export default function Nav({ openNav, onCloseNav }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3, display: 'inline-flex' }}>
-        <Iconify icon={'fa6-solid:shapes'} /> &nbsp; Code
+        <Iconify sx={{ color: palette.primary.main }} icon={'fa6-solid:shapes'} /> &nbsp; Code
       </Box>
 
       <NavSection data={navConfig} />
