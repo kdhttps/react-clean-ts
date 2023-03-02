@@ -5,7 +5,7 @@ export class AxiosHttpClient implements IHttpClient {
   async request(httpRequest: THttpRequest): Promise<THttpResponse> {
     let response: any = {}
     try {
-      response = await axios.request({
+      response = await axios({
         url: httpRequest.url,
         method: httpRequest.method,
         data: httpRequest.data,

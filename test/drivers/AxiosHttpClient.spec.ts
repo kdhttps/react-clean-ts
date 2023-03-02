@@ -2,7 +2,7 @@ import type { THttpRequest, THttpResponse } from '@/usecases/protocols'
 import { AxiosHttpClient } from '@/drivers/AxiosHttpClient'
 
 vi.mock('axios', () => ({
-  request: async () => mockRequestMethod(),
+  default: async () => mockRequestMethod(),
 }))
 
 const mockRequestMethod = vi.fn()
