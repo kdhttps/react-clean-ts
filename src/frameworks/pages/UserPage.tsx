@@ -208,6 +208,7 @@ export default function UserPage() {
                           tabIndex={-1}
                           role='checkbox'
                           selected={selectedUser}
+                          id={`tr${id}`}
                         >
                           <TableCell padding='checkbox'>
                             <Checkbox
