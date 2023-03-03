@@ -1,12 +1,14 @@
-export function remToPx(value) {
+import { Typography } from '@mui/material/styles/createTypography'
+
+export function remToPx(value: string) {
   return Math.round(parseFloat(value) * 16)
 }
 
-export function pxToRem(value) {
+export function pxToRem(value: number) {
   return `${value / 16}rem`
 }
 
-export function responsiveFontSizes({ sm, md, lg }) {
+export function responsiveFontSizes({ sm, md, lg }: { sm: number; md: number; lg: number }) {
   return {
     '@media (min-width:600px)': {
       fontSize: pxToRem(sm),
@@ -23,7 +25,7 @@ export function responsiveFontSizes({ sm, md, lg }) {
 const FONT_PRIMARY = 'Public Sans, sans-serif' // Google Font
 // const FONT_SECONDARY = 'CircularStd, sans-serif'; // Local Font
 
-const typography = {
+const typography: any = {
   fontFamily: FONT_PRIMARY,
   fontWeightRegular: 400,
   fontWeightMedium: 600,

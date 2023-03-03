@@ -19,7 +19,7 @@
       "@/*": ["./src/*"],
       "@test/*": ["./test/*"]
     },
-    "types": ["cypress", "vitest/globals"]
+    "types": ["vitest/globals"]
   },
   "include": ["env.d.ts", "src/**/*", "test/**/*"],
   "references": [{ "path": "./tsconfig.node.json" }]

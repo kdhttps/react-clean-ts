@@ -1,6 +1,6 @@
-import { alpha } from '@mui/material/styles'
+import { alpha, Theme } from '@mui/material/styles'
 
-export default function Input(theme) {
+export default function Input(theme: Theme) {
   return {
     MuiInputBase: {
       styleOverrides: {

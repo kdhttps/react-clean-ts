@@ -30,7 +30,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const [open, setOpen] = useState(null)
 
-  const handleOpen = (event) => {
+  const handleOpen = (event: any) => {
     setOpen(event.currentTarget)
   }
 
@@ -44,7 +44,7 @@ export default function AccountPopover() {
         onClick={handleOpen}
         sx={{
           p: 0,
-          ...(open && {
+          ...((open && {
             '&:before': {
               zIndex: 1,
               content: "''",
@@ -52,9 +52,9 @@ export default function AccountPopover() {
               height: '100%',
               borderRadius: '50%',
               position: 'absolute',
-              bgcolor: (theme) => alpha(theme.palette.grey[900], 0.8),
+              bgcolor: (theme: any) => alpha(theme.palette.grey[900], 0.8),
             },
-          }),
+          }) as any),
         }}
       >
         <Avatar src={avatar} alt='photoURL' />

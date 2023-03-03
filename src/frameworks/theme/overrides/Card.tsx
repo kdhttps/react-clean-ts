@@ -1,4 +1,6 @@
-export default function Card(theme) {
+import { MiTheme } from '../prototype'
+
+export default function Card(theme: MiTheme) {
   return {
     MuiCard: {
       styleOverrides: {

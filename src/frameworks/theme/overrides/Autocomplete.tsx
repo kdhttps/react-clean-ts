@@ -1,4 +1,6 @@
-export default function Autocomplete(theme) {
+import { MiTheme } from '../prototype'
+
+export default function Autocomplete(theme: MiTheme) {
   return {
     MuiAutocomplete: {
       styleOverrides: {

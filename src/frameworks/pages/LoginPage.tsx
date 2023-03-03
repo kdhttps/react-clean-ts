@@ -5,6 +5,7 @@ import { Container, Typography } from '@mui/material'
 import useResponsive from '@/frameworks/hooks/useResponsive'
 import Iconify from '@/frameworks/components/iconify/Iconify'
 import { LoginForm } from '@/frameworks/sections/auth/login'
+import { MiTheme } from '../theme/prototype'
 
 const StyledRoot = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
@@ -12,7 +13,7 @@ const StyledRoot = styled('div')(({ theme }) => ({
   },
 }))
 
-const StyledSection = styled('div')(({ theme }) => ({
+const StyledSection = styled('div')(({ theme }: any) => ({
   width: '100%',
   maxWidth: 480,
   display: 'flex',
@@ -33,7 +34,7 @@ const StyledContent = styled('div')(({ theme }) => ({
 }))
 
 export default function LoginPage() {
-  const mdUp = useResponsive('up', 'md')
+  const mdUp = useResponsive('up', 'md', 0)
 
   return (
     <>

@@ -32,7 +32,11 @@ const TABLE_HEAD = [
   { id: 'actions', label: '', alignRight: true },
 ]
 
-function descendingComparator(a, b, orderBy) {
+function descendingComparator(
+  a: { [x: string]: number },
+  b: { [x: string]: number },
+  orderBy: string | number,
+) {
   if (b[orderBy] < a[orderBy]) {
     return -1
   }
@@ -42,15 +46,19 @@ function descendingComparator(a, b, orderBy) {
   return 0
 }
 
-function getComparator(order, orderBy) {
+function getComparator(order: string, orderBy: string) {
   return order === 'desc'
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy)
+    ? (a: any, b: any) => descendingComparator(a, b, orderBy)
+    : (a: any, b: any) => -descendingComparator(a, b, orderBy)
 }
 
-function applySortFilter(array, comparator, query) {
-  const stabilizedThis = array.map((el, index) => [el, index])
-  stabilizedThis.sort((a, b) => {
+function applySortFilter(
+  array: any[],
+  comparator: { (a: any, b: any): number; (arg0: any, arg1: any): any },
+  query: string,
+) {
+  const stabilizedThis = array.map((el: any, index: any) => [el, index])
+  stabilizedThis.sort((a: number[], b: number[]) => {
     const order = comparator(a[0], b[0])
     if (order !== 0) return order
     return a[1] - b[1]
@@ -58,7 +66,7 @@ function applySortFilter(array, comparator, query) {
   if (query) {
     return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1)
   }
-  return stabilizedThis.map((el) => el[0])
+  return stabilizedThis.map((el: any[]) => el[0])
 }
 
 export default function UserPage() {
@@ -87,13 +95,12 @@ export default function UserPage() {
     try {
       const users: TUser[] = (await makeGetUsers().execute('123')) as TUser[]
       setUsers(users)
-      // setFilteredUsers(applySortFilter(users, getComparator(order, orderBy), filterName))
     } catch (e) {
       console.error(e)
     }
   }
 
-  const handleOpenMenu = (event) => {
+  const handleOpenMenu = (event: any) => {
     setOpen(event.currentTarget)
   }
 
@@ -101,24 +108,24 @@ export default function UserPage() {
     setOpen(null)
   }
 
-  const handleRequestSort = (event, property) => {
+  const handleRequestSort = (event: any, property: React.SetStateAction<string>) => {
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
     setOrderBy(property)
   }
 
-  const handleSelectAllClick = (event) => {
+  const handleSelectAllClick = (event: { target: { checked: any } }) => {
     if (event.target.checked) {
-      const newSelecteds = users.map((n) => n.name)
+      const newSelecteds: any = users.map((n) => n.name)
       setSelected(newSelecteds)
       return
     }
     setSelected([])
   }
 
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name)
-    let newSelected = []
+  const handleClick = (event: React.ChangeEvent<HTMLInputElement>, name: any) => {
+    const selectedIndex = selected.indexOf(name as never)
+    let newSelected: any = []
     if (selectedIndex === -1) {
       newSelected = newSelected.concat(selected, name)
     } else if (selectedIndex === 0) {
@@ -134,16 +141,16 @@ export default function UserPage() {
     setSelected(newSelected)
   }
 
-  const handleChangePage = (event, newPage) => {
+  const handleChangePage = (event: any, newPage: React.SetStateAction<number>) => {
     setPage(newPage)
   }
 
-  const handleChangeRowsPerPage = (event) => {
+  const handleChangeRowsPerPage = (event: { target: { value: string } }) => {
     setPage(0)
     setRowsPerPage(parseInt(event.target.value, 10))
   }
 
-  const handleFilterByName = (event) => {
+  const handleFilterByName = (event: { target: { value: React.SetStateAction<string> } }) => {
     setPage(0)
     setFilterName(event.target.value)
   }
@@ -190,9 +197,9 @@ export default function UserPage() {
                 <TableBody>
                   {filteredUsers
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map((row) => {
+                    .map((row: { id: any; name: any; email: any; username: any }) => {
                       const { id, name, email, username } = row
-                      const selectedUser = selected.indexOf(name) !== -1
+                      const selectedUser = selected.indexOf(name as never) !== -1
 
                       return (
                         <TableRow

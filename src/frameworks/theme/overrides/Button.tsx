@@ -1,6 +1,7 @@
 import { alpha } from '@mui/material/styles'
+import { MiTheme } from '../prototype'
 
-export default function Button(theme) {
+export default function Button(theme: MiTheme) {
   return {
     MuiButton: {
       styleOverrides: {

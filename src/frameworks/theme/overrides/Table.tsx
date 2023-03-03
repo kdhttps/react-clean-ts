@@ -1,4 +1,6 @@
-export default function Table(theme) {
+import { MiTheme } from '../prototype'
+
+export default function Table(theme: MiTheme) {
   return {
     MuiTableCell: {
       styleOverrides: {

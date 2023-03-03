@@ -1,6 +1,6 @@
 import { alpha } from '@mui/material/styles'
 
-export function bgBlur(props) {
+export function bgBlur(props: { color: string; blur?: number; opacity?: number; imgUrl?: string }) {
   const color = props?.color || '#000000'
   const blur = props?.blur || 6
   const opacity = props?.opacity || 0.8
@@ -32,7 +32,13 @@ export function bgBlur(props) {
   }
 }
 
-export function bgGradient(props) {
+export function bgGradient(props: {
+  direction: string
+  startColor: string
+  endColor: string
+  imgUrl: string
+  color: string
+}) {
   const direction = props?.direction || 'to bottom'
   const startColor = props?.startColor
   const endColor = props?.endColor
@@ -55,7 +61,7 @@ export function bgGradient(props) {
   }
 }
 
-export function textGradient(value) {
+export function textGradient(value: string) {
   return {
     background: `-webkit-linear-gradient(${value})`,
     WebkitBackgroundClip: 'text',
@@ -63,7 +69,7 @@ export function textGradient(value) {
   }
 }
 
-export function filterStyles(value) {
+export function filterStyles(value: string) {
   return {
     filter: value,
     WebkitFilter: value,

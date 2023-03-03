@@ -17,10 +17,10 @@ Nav.propTypes = {
   onCloseNav: PropTypes.func,
 }
 
-export default function Nav({ openNav, onCloseNav }) {
+export default function Nav({ openNav, onCloseNav }: any) {
   const { pathname } = useLocation()
 
-  const isDesktop = useResponsive('up', 'lg')
+  const isDesktop = useResponsive('up', 'lg', 0)
 
   useEffect(() => {
     if (openNav) {

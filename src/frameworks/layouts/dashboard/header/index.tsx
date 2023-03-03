@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { styled } from '@mui/material/styles'
+import { styled, Theme } from '@mui/material/styles'
 import { Box, Stack, AppBar, Toolbar, IconButton } from '@mui/material'
 import AccountPopover from './AccountPopover'
 import { bgBlur } from '@/frameworks/utils'
@@ -12,7 +12,7 @@ const HEADER_MOBILE = 64
 
 const HEADER_DESKTOP = 92
 
-const StyledRoot = styled(AppBar)(({ theme }) => {
+const StyledRoot = styled(AppBar)(({ theme }): any => {
   return {
     ...bgBlur({ color: theme.palette.background.default }),
     boxShadow: 'none',
@@ -34,7 +34,7 @@ Header.propTypes = {
   onOpenNav: PropTypes.func,
 }
 
-export default function Header({ onOpenNav }) {
+export default function Header({ onOpenNav }: any) {
   return (
     <StyledRoot>
       <StyledToolbar>

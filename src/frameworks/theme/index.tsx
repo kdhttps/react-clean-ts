@@ -13,12 +13,13 @@ import typography from './typography'
 import GlobalStyles from './globalStyles'
 import customShadows from './customShadows'
 import componentsOverride from './overrides'
+import { MiTheme } from './prototype'
 
 ThemeProvider.propTypes = {
   children: PropTypes.node,
 }
 
-export default function ThemeProvider({ children }) {
+export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const themeOptions = useMemo(
     () => ({
       palette,
@@ -31,7 +32,7 @@ export default function ThemeProvider({ children }) {
   )
 
   const theme = createTheme(themeOptions)
-  theme.components = componentsOverride(theme)
+  theme.components = componentsOverride(theme as MiTheme)
 
   return (
     <StyledEngineProvider injectFirst>

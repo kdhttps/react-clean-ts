@@ -10,6 +10,7 @@ import {
   InputAdornment,
 } from '@mui/material'
 import Iconify from '@/frameworks/components/iconify/Iconify'
+import { MiTheme } from '@/frameworks/theme/prototype'
 
 const StyledRoot = styled(Toolbar)(({ theme }) => ({
   height: 96,
@@ -18,7 +19,7 @@ const StyledRoot = styled(Toolbar)(({ theme }) => ({
   padding: theme.spacing(0, 1, 0, 3),
 }))
 
-const StyledSearch = styled(OutlinedInput)(({ theme }) => ({
+const StyledSearch = styled(OutlinedInput)(({ theme }: any) => ({
   width: 240,
   transition: theme.transitions.create(['box-shadow', 'width'], {
     easing: theme.transitions.easing.easeInOut,
@@ -40,7 +41,7 @@ UserListToolbar.propTypes = {
   onFilterName: PropTypes.func,
 }
 
-export default function UserListToolbar({ numSelected, filterName, onFilterName }) {
+export default function UserListToolbar({ numSelected, filterName, onFilterName }: any) {
   return (
     <StyledRoot
       sx={{
