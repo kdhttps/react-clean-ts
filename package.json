@@ -11,7 +11,8 @@
     "format": "prettier --write '{src,test}/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "build": "tsc && vite build",
     "preview": "export REACT_APP_API_URL=http://localhost/api && npm run build && vite preview --port 4111",
-    "test:e2e": "start-server-and-test preview http://127.0.0.1:4111 'cypress open'"
+    "test:e2e": "start-server-and-test preview http://127.0.0.1:4111 'cypress open'",
+    "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4111 'cypress run'"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
