@@ -1,5 +1,4 @@
 import { Helmet } from 'react-helmet-async'
-import { filter } from 'lodash'
 import React, { useEffect, useState } from 'react'
 import {
   Card,
@@ -64,7 +63,7 @@ function applySortFilter(
     return a[1] - b[1]
   })
   if (query) {
-    return filter(array, (_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1)
+    return array.filter((_user) => _user.name.toLowerCase().indexOf(query.toLowerCase()) !== -1)
   }
   return stabilizedThis.map((el: any[]) => el[0])
 }
