@@ -1,7 +1,7 @@
 {
   "name": "react-clean-ts",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "start": "vite",
@@ -12,7 +12,8 @@
     "build": "tsc && vite build",
     "preview": "export REACT_APP_API_URL=http://localhost/api && npm run build && vite preview --port 4111",
     "test:e2e": "start-server-and-test preview http://127.0.0.1:4111 'cypress open'",
-    "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4111 'cypress run'"
+    "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4111 'cypress run'",
+    "release": "standard-version"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -47,6 +48,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^21.1.0",
     "prettier": "^2.8.4",
+    "standard-version": "^9.5.0",
     "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
