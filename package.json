@@ -13,7 +13,8 @@
     "preview": "export REACT_APP_API_URL=http://localhost/api && npm run build && vite preview --port 4111",
     "test:e2e": "start-server-and-test preview http://127.0.0.1:4111 'cypress open'",
     "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4111 'cypress run'",
-    "release": "standard-version"
+    "release": "standard-version",
+    "commit": "cz"
   },
   "dependencies": {
     "@emotion/react": "^11.10.6",
@@ -38,7 +39,9 @@
     "@typescript-eslint/parser": "^5.53.0",
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.28.5",
+    "commitizen": "^4.3.0",
     "cypress": "^12.7.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-import-resolver-typescript": "^3.5.3",
@@ -53,5 +56,10 @@
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
     "vitest": "^0.28.5"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
