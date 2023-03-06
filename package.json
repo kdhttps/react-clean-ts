@@ -32,7 +32,8 @@
     "simplebar-react": "^3.2.1"
   },
   "devDependencies": {
-    "@cypress/browserify-preprocessor": "^3.0.2",
+    "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
+    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@cypress/code-coverage": "^3.10.0",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/lodash": "^4.14.191",
@@ -45,7 +46,6 @@
     "@vitest/coverage-c8": "^0.28.5",
     "commitizen": "^4.3.0",
     "cypress": "^12.7.0",
-    "cypress-cucumber-preprocessor": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
@@ -56,7 +56,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "jsdom": "^21.1.0",
     "prettier": "^2.8.4",
-    "resolve": "^1.22.1",
     "standard-version": "^9.5.0",
     "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.3",
@@ -68,9 +67,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "cypress-cucumber-preprocessor": {
-    "nonGlobalStepDefinitions": true,
-    "stepDefinitions": "cypress/features"
   }
 }

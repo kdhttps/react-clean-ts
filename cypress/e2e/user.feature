@@ -4,4 +4,5 @@ Feature: Users
   Scenario:
     Given Navigate users page
     When User list is featched
-    Then User table should show user name 
+    Then User table should show user name "Chelsey Dietrich"
+    Then User table should show user name "Ervin Howell"

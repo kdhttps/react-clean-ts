@@ -1,28 +1,31 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { defineConfig } = require('cypress')
-const cucumber = require('cypress-cucumber-preprocessor').default
-const browserify = require('@cypress/browserify-preprocessor')
-const resolve = require('resolve')
+const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
+const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor')
+const { preprocessor } = require('@badeball/cypress-cucumber-preprocessor/browserify')
 
 module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://localhost:4111',
-    setupNodeEvents(on, config) {
+    async setupNodeEvents(on, config) {
       // Cypress code coverage plugin
       require('@cypress/code-coverage/task')(on, config)
 
       // Cypress cucumber plugin
-      const options = {
-        ...browserify.defaultOptions,
-        typescript: resolve.sync('typescript', { baseDir: config.projectRoot }),
-      }
+      // This is required for the preprocessor to be able to generate JSON reports after each run, and more,
+      await addCucumberPreprocessorPlugin(on, config)
 
-      on('file:preprocessor', cucumber(options))
+      on(
+        'file:preprocessor',
+        preprocessor(config, {
+          typescript: require.resolve('typescript'),
+        }),
+      )
 
       // return config
       return config
     },
-    specPattern: 'cypress/features/*.{feature,features}',
+    specPattern: '**/*.feature',
   },
 })
