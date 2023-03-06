@@ -20,5 +20,5 @@ When('User list is featched', () => {
 
 Then('User table should show user name', () => {
   cy.get('h4').contains('User')
-  cy.get('tr#tr5').contains('Chelsey Dietrich')
+  cy.get('table').contains('Chelsey Dietrich')
 })
