@@ -33,6 +33,7 @@
   },
   "devDependencies": {
     "@cypress/code-coverage": "^3.10.0",
+    "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/lodash": "^4.14.191",
     "@types/numeral": "^2.0.2",
     "@types/react": "^18.0.27",
@@ -65,5 +66,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true,
+    "stepDefinitions": "cypress/features"
   }
 }
