@@ -33,7 +33,6 @@
   },
   "devDependencies": {
     "@badeball/cypress-cucumber-preprocessor": "^15.1.4",
-    "@bahmutov/cypress-esbuild-preprocessor": "^2.2.0",
     "@cypress/code-coverage": "^3.10.0",
     "@types/cypress-cucumber-preprocessor": "^4.0.1",
     "@types/lodash": "^4.14.191",

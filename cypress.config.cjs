@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { defineConfig } = require('cypress')
-const createBundler = require('@bahmutov/cypress-esbuild-preprocessor')
 const { addCucumberPreprocessorPlugin } = require('@badeball/cypress-cucumber-preprocessor')
 const { preprocessor } = require('@badeball/cypress-cucumber-preprocessor/browserify')
 

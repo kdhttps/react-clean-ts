@@ -5,7 +5,7 @@ import {
   Before,
   defineParameterType,
 } from '@badeball/cypress-cucumber-preprocessor'
-import { getUsers } from '../mocks/getUsers'
+import { getUsers } from '../../mocks/getUsers'
 
 let users = []
 
