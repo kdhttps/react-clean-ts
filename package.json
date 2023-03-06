@@ -10,7 +10,7 @@
     "lint:fix": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write '{src,test}/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "build": "tsc && vite build",
-    "preview": "export REACT_APP_API_URL=http://localhost/api && npm run build && vite preview --port 4111",
+    "preview": "export CYPRESS_COVERAGE=true REACT_APP_API_URL=http://localhost/api && npm run build && vite preview --port 4111",
     "test:e2e": "start-server-and-test preview http://127.0.0.1:4111 'cypress open'",
     "test:e2e:ci": "start-server-and-test preview http://127.0.0.1:4111 'cypress run'",
     "release": "standard-version",
@@ -31,6 +31,7 @@
     "simplebar-react": "^3.2.1"
   },
   "devDependencies": {
+    "@cypress/code-coverage": "^3.10.0",
     "@types/lodash": "^4.14.191",
     "@types/numeral": "^2.0.2",
     "@types/react": "^18.0.27",
@@ -41,6 +42,7 @@
     "@vitest/coverage-c8": "^0.28.5",
     "commitizen": "^4.3.0",
     "cypress": "^12.7.0",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.34.0",
     "eslint-config-prettier": "^8.6.0",
@@ -55,6 +57,7 @@
     "start-server-and-test": "^2.0.0",
     "typescript": "^4.9.3",
     "vite": "^4.1.0",
+    "vite-plugin-istanbul": "^4.0.1",
     "vitest": "^0.28.5"
   },
   "config": {
