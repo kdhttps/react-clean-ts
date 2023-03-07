@@ -32,7 +32,7 @@ When('User list is featched', () => {
   cy.wait('@getUsers')
 })
 
-Then('User table should show user name {string}', (name) => {
+Then('User table should show user name {string}', (name: string) => {
   cy.get('h4').contains('User')
-  cy.get('table').contains('Chelsey')
+  cy.get('table').contains(name)
 })
