@@ -11,7 +11,7 @@ export default function DashboardAppPage() {
         <title> Dashboard </title>
       </Helmet>
 
-      <Container maxWidth='xl'>
+      <Container maxWidth={false}>
         <Typography variant='h4' sx={{ mb: 5, color: palette.primary.main }}>
           Hi, Welcome back
         </Typography>
