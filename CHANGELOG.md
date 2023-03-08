@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/kdhttps/react-clean-ts/compare/v0.0.2...v0.0.3) (2023-03-08)
+
+
+### Features
+
+* add latest bahmutov/cypress package integration ([258c9c6](https://github.com/kdhttps/react-clean-ts/commit/258c9c6d9ed7fb5c0432edcadc2fe4c8f7512931))
+
 ### [0.0.2](https://github.com/kdhttps/react-clean-ts/compare/v0.0.1...v0.0.2) (2023-03-04)
 
 ### 0.0.1 (2023-03-04)
