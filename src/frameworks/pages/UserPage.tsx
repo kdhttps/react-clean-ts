@@ -164,7 +164,7 @@ export default function UserPage() {
         <title> User </title>
       </Helmet>
 
-      <Container maxWidth='xl'>
+      <Container maxWidth={false}>
         <Stack direction='row' alignItems='center' justifyContent='space-between' mb={5}>
           <Typography variant='h4' gutterBottom>
             User
